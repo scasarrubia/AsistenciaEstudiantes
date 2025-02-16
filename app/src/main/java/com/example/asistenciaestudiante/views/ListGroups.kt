@@ -11,11 +11,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.asistenciaestudiante.data.model.Group
 import com.example.asistenciaestudiante.viewModel.ListGroupsViewModel
+import androidx.compose.runtime.livedata.observeAsState
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListGroups(viewModel: ListGroupsViewModel = viewModel()) {
-    val groups by viewModel.groups.collectAsState()
+    val groups by viewModel.groups.observeAsState(emptyList())
 
     LaunchedEffect(Unit) {
         viewModel.fetchGroups()
