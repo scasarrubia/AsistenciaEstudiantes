@@ -1,4 +1,4 @@
-package com.example.asistenciaestudiante.Utils
+package com.example.asistenciaestudiante.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

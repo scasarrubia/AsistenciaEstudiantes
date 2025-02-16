@@ -10,8 +10,6 @@ import com.example.asistenciaestudiante.data.network.RetrofitClient
 import com.example.asistenciaestudiante.data.repository.GroupRepository
 import com.example.asistenciaestudiante.data.room.AppDatabase
 import com.example.asistenciaestudiante.data.room.GroupEntity
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class ListGroupsViewModel(application: Application) : AndroidViewModel(application) {
@@ -28,7 +26,8 @@ class ListGroupsViewModel(application: Application) : AndroidViewModel(applicati
     init {
         val db = AppDatabase.getDatabase(application)
         val apiService = RetrofitClient.apiService
-        repository = GroupRepository(apiService, db.groupDao(), application) // Ahora tiene los 3 parámetros
+        repository =
+            GroupRepository(apiService, db.groupDao(), application) // Ahora tiene los 3 parámetros
         fetchGroups()
     }
 
@@ -40,7 +39,7 @@ class ListGroupsViewModel(application: Application) : AndroidViewModel(applicati
                 val groupEntities: List<GroupEntity> = repository.getGroups()
                 _groups.value = groupEntities.map { Group(it.id, it.name) }
                 _error.value = null
-            }catch (e: Exception){
+            } catch (e: Exception) {
                 _error.value = "Error fetchGroups"
             } finally {
                 _loading.value = false
