@@ -10,4 +10,10 @@ interface ApiService {
     suspend fun getGroups(
         @Query("accion") accion: String = "obtenerGrupos"
     ): Response<List<Group>>
+
+    @GET("exec")
+    suspend fun getStudents(
+        @Query("accion") accion: String = "obtenerEstudiantes",
+        @Query("idGrupo") idGrupo: String
+    ): Response<List<Student>>
 }
